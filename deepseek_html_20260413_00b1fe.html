@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Portafolio Dinámico | Editor de Secciones</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Contenedor principal */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ========== SIDEBAR / MENÚ LATERAL ========== */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            backdrop-filter: blur(2px);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
+            padding: 2rem 1.2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .logo-area {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .logo-area h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .logo-area p {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 6px;
+        }
+
+        /* Lista de secciones (menu dinamico) */
+        .nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            font-weight: 500;
+            color: #334155;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .nav-link i {
+            width: 24px;
+            font-size: 1.2rem;
+            color: #5b6e8c;
+        }
+
+        .nav-link:hover {
+            background: #eef2ff;
+            color: #1e40af;
+            transform: translateX(4px);
+        }
+
+        .nav-link.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 6px 12px -6px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-link.active i {
+            color: white;
+        }
+
+        /* Botones de gestión de secciones */
+        .section-actions {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-icon {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
+            padding: 0.6rem 1rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #1e293b;
+        }
+
+        .btn-icon i {
+            font-size: 0.9rem;
+        }
+
+        .btn-icon:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: scale(0.98);
+        }
+
+        .btn-primary-custom {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-danger-custom {
+            color: #b91c1c;
+            border-color: #fecaca;
+        }
+
+        .btn-danger-custom:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        /* ========== CONTENIDO PRINCIPAL ========== */
+        .main-content {
+            flex: 1;
+            padding: 2rem 2.5rem;
+            overflow-x: auto;
+        }
+
+        /* Tarjeta de contenido de sección */
+        .section-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+            padding: 2rem 2.2rem;
+            transition: all 0.2s;
+            border: 1px solid #eef2ff;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b, #2d3a5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .edit-btn, .save-btn, .cancel-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .edit-btn {
+            background: #eef2ff;
+            color: #2563eb;
+        }
+
+        .save-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .content-editable {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1e293b;
+            min-height: 280px;
+            padding: 1rem;
+            background: #fefefe;
+            border-radius: 24px;
+            transition: 0.1s;
+        }
+
+        .editing-active {
+            border: 2px solid #3b82f6;
+            background: #fafcff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        .static-content {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Modal para agregar sección */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 2rem;
+            width: 90%;
+            max-width: 480px;
+            padding: 2rem;
+            box-shadow: 0 25px 40px -12px black;
+        }
+
+        .modal h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            margin: 0.8rem 0;
+            font-family: inherit;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .empty-message {
+            color: #94a3b8;
+            text-align: center;
+            padding: 3rem;
+            font-style: italic;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+            .main-content {
+                padding: 1.5rem;
+            }
+            .section-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- SIDEBAR: MENU DE SECCIONES (EDITABLE Y AGREGABLE) -->
+    <aside class="sidebar">
+        <div class="logo-area">
+            <h2><i class="fas fa-laptop-code"></i> MiPortafolio</h2>
+            <p>Secciones dinámicas · Edita y agrega contenido</p>
+        </div>
+
+        <ul class="nav-menu" id="navMenuContainer">
+            <!-- Las secciones se renderizarán dinámicamente con JS -->
+        </ul>
+
+        <div class="section-actions">
+            <button class="btn-icon" id="addSectionBtn"><i class="fas fa-plus-circle"></i> Agregar sección</button>
+            <button class="btn-icon btn-danger-custom" id="deleteCurrentSectionBtn"><i class="fas fa-trash-alt"></i> Eliminar sección actual</button>
+            <button class="btn-icon" id="resetDefaultBtn"><i class="fas fa-undo-alt"></i> Restaurar ejemplo</button>
+        </div>
+        <footer style="margin-top: 2rem; font-size: 0.7rem;">
+            <i class="fas fa-edit"></i> Haz clic en "Editar" para modificar contenido
+        </footer>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL (vista de la sección activa) -->
+    <main class="main-content">
+        <div class="section-card" id="mainSectionCard">
+            <div class="section-header">
+                <h1 class="section-title" id="currentSectionTitle">Inicio</h1>
+                <div class="edit-controls" id="editControls">
+                    <button class="edit-btn" id="editContentBtn"><i class="fas fa-pen"></i> Editar contenido</button>
+                </div>
+            </div>
+            <div id="contentDisplayArea" class="content-editable static-content">
+                <!-- Aquí se muestra el contenido de la sección activa (texto editable) -->
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL para agregar nueva sección -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
+        <h3><i class="fas fa-layer-group"></i> Nueva sección</h3>
+        <input type="text" id="newSectionName" placeholder="Nombre de la sección (ej: Proyectos, Habilidades)" autocomplete="off">
+        <textarea id="newSectionContent" rows="4" placeholder="Contenido inicial de la sección ..."></textarea>
+        <div class="modal-buttons">
+            <button class="btn-icon" id="cancelModalBtn">Cancelar</button>
+            <button class="btn-icon btn-primary-custom" id="confirmAddSectionBtn">Crear sección</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- MODELO DE DATOS ----------
+    // Cada sección: { id, title, content }
+    let sections = [];
+    let activeSectionId = null;
+
+    // Estado de edición (si el contenido está en modo edición)
+    let isEditing = false;
+    let tempContentBackup = "";  // para cancelar edición
+
+    // Elementos DOM
+    const navMenuContainer = document.getElementById('navMenuContainer');
+    const currentSectionTitleSpan = document.getElementById('currentSectionTitle');
+    const contentDisplayArea = document.getElementById('contentDisplayArea');
+    const editContentBtn = document.getElementById('editContentBtn');
+    const addSectionBtn = document.getElementById('addSectionBtn');
+    const deleteCurrentSectionBtn = document.getElementById('deleteCurrentSectionBtn');
+    const resetDefaultBtn = document.getElementById('resetDefaultBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const newSectionNameInput = document.getElementById('newSectionName');
+    const newSectionContentArea = document.getElementById('newSectionContent');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+    const confirmAddSectionBtn = document.getElementById('confirmAddSectionBtn');
+
+    // Helper: guardar en localStorage
+    function saveToLocalStorage() {
+        const dataToStore = {
+            sections: sections,
+            activeId: activeSectionId
+        };
+        localStorage.setItem('dynamicPortfolio', JSON.stringify(dataToStore));
+    }
+
+    // Cargar desde localStorage o inicializar datos por defecto
+    function loadFromLocalStorage() {
+        const stored = localStorage.getItem('dynamicPortfolio');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                if (parsed.sections && Array.isArray(parsed.sections) && parsed.sections.length > 0) {
+                    sections = parsed.sections;
+                    activeSectionId = parsed.activeId;
+                    // validar que activeSectionId exista aún
+                    const stillExists = sections.some(sec => sec.id === activeSectionId);
+                    if (!stillExists && sections.length > 0) activeSectionId = sections[0].id;
+                    else if (!stillExists) activeSectionId = null;
+                    return true;
+                }
+            } catch(e) { console.warn(e); }
+        }
+        // datos por defecto: Inicio y una sección extra (Portafolio destacado)
+        sections = [
+            { id: 'sec1', title: 'Inicio', content: '✨ Bienvenido a mi portafolio dinámico.\n\nSoy un profesional creativo, desarrollador web y diseñador de experiencias. Aquí puedes editar cualquier sección, agregar nuevas o eliminar las que desees.\n\n✅ Edita este texto con el botón "Editar contenido".\n✅ Usa el menú lateral para navegar.\n✅ ¡Personaliza completamente tu portafolio!' },
+            { id: 'sec2', title: 'Proyectos destacados', content: '🚀 **Proyecto Alpha**: Aplicación web para gestión de tareas.\n🎨 **Diseño UI/UX**: Rediseño de plataforma educativa.\n📱 **App móvil**: Seguimiento de hábitos con React Native.\n\n(Edita este contenido para mostrar tus proyectos reales)' },
+            { id: 'sec3', title: 'Habilidades', content: '🔹 JavaScript / React / Vue\n🔹 Python / Flask\n🔹 HTML5, CSS3, Tailwind\n🔹 Diseño responsivo y UX\n🔹 Gestión de proyectos ágiles\n\n¡Puedes modificar la lista con tus propias habilidades!' }
+        ];
+        activeSectionId = 'sec1';
+        return true;
+    }
+
+    // Renderizar menú lateral (lista de secciones)
+    function renderMenu() {
+        if (!navMenuContainer) return;
+        navMenuContainer.innerHTML = '';
+        sections.forEach(section => {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            const button = document.createElement('button');
+            button.className = `nav-link ${activeSectionId === section.id ? 'active' : ''}`;
+            button.innerHTML = `<i class="fas fa-folder-open"></i><span>${escapeHtml(section.title)}</span>`;
+            button.addEventListener('click', () => {
+                if (isEditing) {
+                    if (confirm('Hay una edición sin guardar. ¿Deseas cancelar los cambios y cambiar de sección?')) {
+                        cancelEditing();
+                        setActiveSection(section.id);
+                    }
+                } else {
+                    setActiveSection(section.id);
+                }
+            });
+            li.appendChild(button);
+            navMenuContainer.appendChild(li);
+        });
+    }
+
+    // Mostrar contenido de la sección activa en el área principal
+    function displayActiveContent() {
+        if (!activeSectionId) {
+            currentSectionTitleSpan.innerText = 'Sin secciones';
+            contentDisplayArea.innerHTML = '<div class="empty-message"><i class="fas fa-exclamation-triangle"></i> No hay secciones disponibles. Agrega una desde el menú.</div>';
+            return;
+        }
+        const activeSection = sections.find(sec => sec.id === activeSectionId);
+        if (activeSection) {
+            currentSectionTitleSpan.innerText = activeSection.title;
+            if (!isEditing) {
+                // mostrar modo estático (texto plano con saltos de línea)
+                contentDisplayArea.innerHTML = `<div class="static-content">${formatContentWithLineBreaks(escapeHtml(activeSection.content))}</div>`;
+                contentDisplayArea.classList.remove('editing-active');
+            } else {
+                // modo edición: se muestra textarea o contenteditable? Usaremos div contenteditable para mejor UX
+                if (!contentDisplayArea.hasAttribute('contenteditable') || contentDisplayArea.getAttribute('contenteditable') !== 'true') {
+                    contentDisplayArea.setAttribute('contenteditable', 'true');
+                    contentDisplayArea.classList.add('editing-active');
+                }
+                contentDisplayArea.innerHTML = activeSection.content; // texto plano editable sin escape extra para permitir formato rico? usamos texto plano para simplicidad pero permitimos que el usuario escriba HTML simple. Por seguridad limitamos a texto.
+                // pero para que sea seguro, usamos texto plano pero con innerText.
+                contentDisplayArea.innerText = activeSection.content;
+            }
+        } else {
+            currentSectionTitleSpan.innerText = 'Sección no encontrada';
+            contentDisplayArea.innerHTML = '<div class="empty-message">Error: sección no existe.</div>';
+        }
+    }
+
+    // función para escapar HTML pero preservar saltos de línea en modo vista
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    function formatContentWithLineBreaks(text) {
+        if (!text) return '';
+        return text.replace(/\n/g, '<br>');
+    }
+
+    // Cambiar sección activa
+    function setActiveSection(id) {
+        if (!sections.some(sec => sec.id === id)) return;
+        activeSectionId = id;
+        // Si estábamos en modo edición, lo cancelamos forzadamente (por seguridad ya se preguntó)
+        if (isEditing) {
+            cancelEditing();
+        }
+        renderMenu();
+        displayActiveContent();
+        saveToLocalStorage();
+    }
+
+    // Modo edición
+    function enableEditing() {
+        if (!activeSectionId) return;
+        const section = sections.find(sec => sec.id === activeSectionId);
+        if (!section) return;
+        isEditing = true;
+        tempContentBackup = section.content;
+        // transformar el área de contenido en editable
+        contentDisplayArea.setAttribute('contenteditable', 'true');
+        contentDisplayArea.classList.add('editing-active');
+        contentDisplayArea.innerText = section.content; // asegurar texto actual
+        contentDisplayArea.focus();
+
+        // cambiar botones: mostrar guardar y cancelar
+        const controlsDiv = document.getElementById('editControls');
+        controlsDiv.innerHTML = `
+            <button class="save-btn" id="saveContentBtn"><i class="fas fa-save"></i> Guardar</button>
+            <button class="cancel-btn" id="cancelContentBtn"><i class="fas fa-times"></i> Cancelar</button>
+        `;
+        document.getElementById('saveContentBtn')?.addEventListener('click', saveEditing);
+        document.getElementById('cancelContentBtn')?.addEventListener('click', cancelEditing);
+    }
+
+    function saveEditing() {
+        if (!isEditing) return;
+        if (!activeSectionId) return;
+        const newContent = contentDisplayArea.innerText || '';
+        const sectionIndex = sections.findIndex(sec => sec.id === activeSectionId);
+        if (sectionIndex !== -1) {
+            sections[sectionIndex].content = newContent;
+        }
+        isEditing = false;
+        // restaurar vista normal
+        contentDisplayArea.removeAttribute('contenteditable');
+        contentDisplayArea.classList.remove('editing-active');
+        // restaurar controles originales
+        const controlsDiv = document.getElementById('editControls');
+        controlsDiv.innerHTML = `<button class="edit-btn" id="editContentBtn"><i class="fas fa-pen"></i> Editar contenido</button>`;
+        document.getElementById('editContentBtn')?.addEventListener('click', enableEditing);
+        displayActiveContent();  // refrescar vista con formato
+        saveToLocalStorage();
+    }
+
+    function cancelEditing() {
+        if (!isEditing) return;
+        // restaurar contenido desde backup
+        const sectionIndex = sections.findIndex(sec => sec.id === activeSectionId);
+        if (sectionIndex !== -1 && tempContentBackup !== undefined) {
+            sections[sectionIndex].content = tempContentBackup;
+        }
+        isEditing = false;
+        contentDisplayArea.removeAttribute('contenteditable');
+        contentDisplayArea.classList.remove('editing-active');
+        const controlsDiv = document.getElementById('editControls');
+        controlsDiv.innerHTML = `<button class="edit-btn" id="editContentBtn"><i class="fas fa-pen"></i> Editar contenido</button>`;
+        document.getElementById('editContentBtn')?.addEventListener('click', enableEditing);
+        displayActiveContent();
+        saveToLocalStorage();
+    }
+
+    // Agregar sección
+    function openAddModal() {
+        newSectionNameInput.value = '';
+        newSectionContentArea.value = '';
+        modalOverlay.classList.add('active');
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+    }
+
+    function addNewSection() {
+        let title = newSectionNameInput.value.trim();
+        let content = newSectionContentArea.value.trim();
+        if (!title) {
+            alert('El nombre de la sección es obligatorio.');
+            return;
+        }
+        if (!content) content = 'Contenido vacío. Puedes editarlo más tarde.';
+        const newId = 'sec_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+        const newSection = {
+            id: newId,
+            title: title,
+            content: content
+        };
+        sections.push(newSection);
+        setActiveSection(newId);
+        closeModal();
+        saveToLocalStorage();
+    }
+
+    // Eliminar sección actual
+    function deleteCurrentSection() {
+        if (!activeSectionId) return;
+        if (sections.length === 1) {
+            alert('No puedes eliminar la única sección. Agrega otra antes de eliminar esta.');
+            return;
+        }
+        const confirmDelete = confirm(`¿Eliminar la sección "${sections.find(s => s.id === activeSectionId)?.title}"?`);
+        if (!confirmDelete) return;
+        const newSections = sections.filter(sec => sec.id !== activeSectionId);
+        sections = newSections;
+        // definir nuevo activo: el primero de la lista
+        if (sections.length > 0) {
+            activeSectionId = sections[0].id;
+        } else {
+            activeSectionId = null;
+        }
+        if (isEditing) cancelEditing();
+        renderMenu();
+        displayActiveContent();
+        saveToLocalStorage();
+    }
+
+    // Restaurar ejemplo con datos iniciales (sin perder la posibilidad de agregar)
+    function resetToDefault() {
+        if (confirm('¿Restaurar el portafolio a los valores de ejemplo? Se perderán todas las secciones personalizadas.')) {
+            // reiniciar datos por defecto
+            sections = [
+                { id: 'sec1', title: 'Inicio', content: '✨ Bienvenido a mi portafolio dinámico.\n\nSoy un profesional creativo, desarrollador web y diseñador de experiencias. Aquí puedes editar cualquier sección, agregar nuevas o eliminar las que desees.\n\n✅ Edita este texto con el botón "Editar contenido".\n✅ Usa el menú lateral para navegar.\n✅ ¡Personaliza completamente tu portafolio!' },
+                { id: 'sec2', title: 'Proyectos destacados', content: '🚀 **Proyecto Alpha**: Aplicación web para gestión de tareas.\n🎨 **Diseño UI/UX**: Rediseño de plataforma educativa.\n📱 **App móvil**: Seguimiento de hábitos con React Native.\n\n(Edita este contenido para mostrar tus proyectos reales)' },
+                { id: 'sec3', title: 'Habilidades', content: '🔹 JavaScript / React / Vue\n🔹 Python / Flask\n🔹 HTML5, CSS3, Tailwind\n🔹 Diseño responsivo y UX\n🔹 Gestión de proyectos ágiles\n\n¡Puedes modificar la lista con tus propias habilidades!' }
+            ];
+            activeSectionId = 'sec1';
+            if (isEditing) cancelEditing();
+            renderMenu();
+            displayActiveContent();
+            saveToLocalStorage();
+        }
+    }
+
+    // Event listeners globales y sincronización
+    function bindEvents() {
+        editContentBtn.addEventListener('click', enableEditing);
+        addSectionBtn.addEventListener('click', openAddModal);
+        deleteCurrentSectionBtn.addEventListener('click', deleteCurrentSection);
+        resetDefaultBtn.addEventListener('click', resetToDefault);
+        cancelModalBtn.addEventListener('click', closeModal);
+        confirmAddSectionBtn.addEventListener('click', addNewSection);
+        // cerrar modal si se hace clic fuera
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+    }
+
+    // Inicialización
+    function init() {
+        loadFromLocalStorage();
+        renderMenu();
+        displayActiveContent();
+        bindEvents();
+        // asegurar que si no existe active, pero hay secciones
+        if (!activeSectionId && sections.length) activeSectionId = sections[0].id;
+        displayActiveContent();
+        renderMenu();
+    }
+
+    init();
+</script>
+</body>
+</html>
