@@ -314,109 +314,112 @@
 </div>
 
 <script>
-    
     const sections = [
         {
             id: "inicio",
-            icon: "fa-solid fa-house",
+            icon: "fas fa-house",
             title: "Inicio",
             description: "Bienvenido a mi Portafolio Digital, de la asignatura de PROYECTOS DE INVESTIGACIÓN.",
             embeds: []
         },
         {
-            id: "preliminares",
+            id: "Documentos",
             icon: "fas fa-desktop",
-            title: "Preliminares",
-            description: "Material relacionado con la asignatura <strong>Proyectos de investigacion</strong>",
+            title: "Documentos",
+            description: "Material relacionado con la asignatura <strong>Proyectos de investigación</strong>",
             embeds: [
-                {
-                    label: "Portada",
-                    src: "https://drive.google.com/file/d/1tLEEc3cAzUhUMAnzeHMdTtjby29gU23v/preview",
-                    driveLink: "https://drive.google.com/file/d/1tLEEc3cAzUhUMAnzeHMdTtjby29gU23v/view?usp=sharing"
-                },
-                {
-                    label: "Sílabus",
-                    src: "https://drive.google.com/file/d/1qRXaDLqMfvocg3Dz25V_Sd0OPCUANAm6/preview",
-                    driveLink: "https://drive.google.com/file/d/1qRXaDLqMfvocg3Dz25V_Sd0OPCUANAm6/view?usp=sharing"
-                },
-                {
-                    label: "Líneas de Investigación de la Carrera",
-                    src: "https://drive.google.com/file/d/1wqS1hW-8TShdvbPEEAD6BQIeGEW5ASco/preview",
-                    driveLink: "https://drive.google.com/file/d/1wqS1hW-8TShdvbPEEAD6BQIeGEW5ASco/view?usp=sharing"
-                },
-                {
-                    label: "Anexo 2. Formato para la presentación de protocolos de investigación con normativa - aprobado 24 marzo 2026",
-                    src: "https://drive.google.com/file/d/1UQs5QcJxqw84vB1zVkpZwKwfUUi_Mt5p/preview",
-                    driveLink: "https://docs.google.com/document/d/1UQs5QcJxqw84vB1zVkpZwKwfUUi_Mt5p/edit?usp=sharing&ouid=111017206060008128060&rtpof=true&sd=true"
-                }
-                
+                { label: "Portada", src: "https://drive.google.com/file/d/1tLEEc3cAzUhUMAnzeHMdTtjby29gU23v/preview", driveLink: "https://drive.google.com/file/d/1tLEEc3cAzUhUMAnzeHMdTtjby29gU23v/view?usp=sharing" },
+                { label: "Sílabo", src: "https://drive.google.com/file/d/1qRXaDLqMfvocg3Dz25V_Sd0OPCUANAm6/preview", driveLink: "https://drive.google.com/file/d/1qRXaDLqMfvocg3Dz25V_Sd0OPCUANAm6/view?usp=sharing" },
+                { label: "Líneas de Investigación de la Carrera", src: "https://drive.google.com/file/d/1wqS1hW-8TShdvbPEEAD6BQIeGEW5ASco/preview", driveLink: "https://drive.google.com/file/d/1wqS1hW-8TShdvbPEEAD6BQIeGEW5ASco/view?usp=sharing" },
+                { label: "Anexo 2. Formato para la presentación de protocolos de investigación", src: "https://drive.google.com/file/d/1UQs5QcJxqw84vB1zVkpZwKwfUUi_Mt5p/preview", driveLink: "https://docs.google.com/document/d/1UQs5QcJxqw84vB1zVkpZwKwfUUi_Mt5p/edit?usp=sharing&ouid=111017206060008128060&rtpof=true&sd=true" },
+                { label: "ANEXO 1. Requisitos para evaluación del protocolo de investigación observacional en seres humanos ", src: " https://drive.google.com/file/d/1WyWvxtlZFJlaAJ9lJoMpzLOn8rr9SN1U/preview", driveLink: "https://drive.google.com/file/d/1WyWvxtlZFJlaAJ9lJoMpzLOn8rr9SN1U/preview?usp=sharing" },
+                { label: " ANEXO 1. B Solicitud de evaluación del protocolo de investigación observacional y/o de intervención en seres humanos", src: "https://docs.google.com/document/d/e/2PACX-1vTgHuKawMP_l1vU814MRmHWUNfHXU9hl0mF2n6Tg7Sf88lOC7hvi_M8s7aYsGc2Kw/pub?embedded=true ", driveLink: " https://docs.google.com/document/d/e/2PACX-1vTgHuKawMP_l1vU814MRmHWUNfHXU9hl0mF2n6Tg7Sf88lOC7hvi_M8s7aYsGc2Kw/pub?embedded=true" },
+                { label: "Anexo 2.1 Formulario para presentación de estudios cualitativos con normativa aprobado 24 marzo 2026 ", src: "https://docs.google.com/document/d/e/2PACX-1vQPf1OwPjk4VZlAQrLlerGspsN10DzrTbzOqnhYaaQ31Omd7l3Q1dsqkuWm81u9hA/pub?embedded=true ", driveLink: " https://docs.google.com/document/d/e/2PACX-1vQPf1OwPjk4VZlAQrLlerGspsN10DzrTbzOqnhYaaQ31Omd7l3Q1dsqkuWm81u9hA/pub?embedded=true" },
+                { label: "Anexo 3 . Carta de interes institucional ", src: " https://docs.google.com/document/d/e/2PACX-1vQhRAsTf1oP-FyHhIvKqT3VSl28KC_krA81qRnsYF_Ab1CxfRt458LTce1LFMzwlQ/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vQhRAsTf1oP-FyHhIvKqT3VSl28KC_krA81qRnsYF_Ab1CxfRt458LTce1LFMzwlQ/pub?embedded=true" },
+                { label: "Anexo 3.B  Carta de no Conflicto de intereses ", src: " https://docs.google.com/document/d/e/2PACX-1vSyXscmb0cLM7KedqP--WuHHBCK4emW7z04-BCslPx1eh30VDHMgyYWvphx3VD2RA/pub?embedded=true", driveLink: " https://docs.google.com/document/d/e/2PACX-1vSyXscmb0cLM7KedqP--WuHHBCK4emW7z04-BCslPx1eh30VDHMgyYWvphx3VD2RA/pub?embedded=true" },
+                { label: "ANEXO 3. C Carta declaración de confidencialidad ", src: " https://drive.google.com/file/d/16Kilp6Yx31anX_8EEPnFTWvWe24NDe87/preview", driveLink: " https://drive.google.com/file/d/16Kilp6Yx31anX_8EEPnFTWvWe24NDe87/preview?usp=sharing" },
+                { label: " Anexo 3.D Hoja de vida para Investigadores", src: "https://docs.google.com/document/d/e/2PACX-1vR0Nh1ujnrpj6_cLXCvyHBGApCHM-XG1rYsfVjjaf4On26Yut03UYz_K0hO4pXZuA/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vR0Nh1ujnrpj6_cLXCvyHBGApCHM-XG1rYsfVjjaf4On26Yut03UYz_K0hO4pXZuA/pub?embedded=true" },
+                { label: " ANEXO 4.A. DECLARACIÓN DE RESPONSABILIDAD Y COMPROMISO DE CUMPLIMIENTO DE LAS NORMAS BIOÉTICAS DEL INVESTIGADOR PRINCIPAL", src: " https://drive.google.com/file/d/1WhBYVj8Put4YAXobopNMhbqlphEu1J9D/preview", driveLink: " https://drive.google.com/file/d/1WhBYVj8Put4YAXobopNMhbqlphEu1J9D/preview?usp=sharing" },
+                { label: " Anexo 6.Consideraciones mínimas que debe tener un documento de consentimiento informado CEISH-UCE", src: "https://drive.google.com/file/d/1UFnAaCeSUqdxshiTPTJnmZiO-9L8FC9i/preview", driveLink: "https://drive.google.com/file/d/1UFnAaCeSUqdxshiTPTJnmZiO-9L8FC9i/preview?usp=sharing " },
+                { label: "Anexo 6.A-I Consentimiento Informado para representantes de menores de edad", src: "https://docs.google.com/document/d/e/2PACX-1vTudxve4ZdpmUp3j-iWV_V3kkQ3XQi4ZtpOZGhiuOKX8iCmGHa2WwBLLFuLRokw6g/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vTudxve4ZdpmUp3j-iWV_V3kkQ3XQi4ZtpOZGhiuOKX8iCmGHa2WwBLLFuLRokw6g/pub?embedded=true" },
+                { label: "ANEXO 6.E Consentimiento informado específico en estudios observacionales", src: "https://drive.google.com/file/d/18Y1u5LJSJC7gAH5-GaI8yZTUuIlxMOVf/preview", driveLink: " https://drive.google.com/file/d/18Y1u5LJSJC7gAH5-GaI8yZTUuIlxMOVf/preview?usp=sharing" },
+                { label: "Anexo 6D-A-I A  Asentimiento informado para niños 3 a 5 años_", src: "https://docs.google.com/document/d/e/2PACX-1vSPWdxY7QjJrsrU0iVgFn8PSoh6yhEEtnuSSxh1-OmTKCXf7vIquHYp5pftgvbRSg/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vSPWdxY7QjJrsrU0iVgFn8PSoh6yhEEtnuSSxh1-OmTKCXf7vIquHYp5pftgvbRSg/pub?embedded=true" },
+                { label: "Anexo 6D-A-I-B Asentimiento informado para niños, niñas y adolescentes de 6 a 17 años", src: "https://drive.google.com/file/d/1lQPqvFEzxy7GjVEfs-BmhVoKWyG1r89m/preview", driveLink: "https://drive.google.com/file/d/1lQPqvFEzxy7GjVEfs-BmhVoKWyG1r89m/preview?usp=sharing " },
+                { label: "GUÍA METODOLÓGICA PROYECTOS DE INVESTIGACIÓN ", src: " https://drive.google.com/file/d/16DsCQco6WGK88DNs_uo3D5nIGOAxi2C6/preview", driveLink: " https://drive.google.com/file/d/16DsCQco6WGK88DNs_uo3D5nIGOAxi2C6/preview?usp=sharing" },
             ]
         },
         {
             id: "taxonomias",
             icon: "fas fa-chalkboard-teacher",
             title: "Taxonomías",
-            description: "Clasificacion de verbos según diversos Autores",
-            embeds:
-            [
-                { label: "Taxónomía de Bloom",
-                src: "https://drive.google.com/file/d/1FG7juxSu-O2j4qX9x3jq3Worx_r_1CT3/preview",
-                driveLink: "https://drive.google.com/file/d/1FG7juxSu-O2j4qX9x3jq3Worx_r_1CT3/view?usp=sharing" },
-                { label: "Taxónomía de Anderson",
-                src: "https://drive.google.com/file/d/1HJ7KVvvUWJCa1gFJn-v_R_D3GzdXxYtO/preview",
-                driveLink: "https://drive.google.com/file/d/1HJ7KVvvUWJCa1gFJn-v_R_D3GzdXxYtO/view?usp=sharing" },
-                { label: "Taxónomía de Marzano",
-                src: "https://drive.google.com/file/d/1BKzxoMnGXOqM4AxIFDYEcVJ19wGROaZw/preview",
-                driveLink: "https://drive.google.com/file/d/1BKzxoMnGXOqM4AxIFDYEcVJ19wGROaZw/view?usp=sharing" },
-                { label: "Taxónomía Socioformativa",
-                src: "https://drive.google.com/file/d/1kgxwJpt7GJkPvpIbI6JgKAeDg1RJ6wQL/preview",
-                driveLink: "https://drive.google.com/file/d/1kgxwJpt7GJkPvpIbI6JgKAeDg1RJ6wQL/view?usp=sharing" }
+            description: "Clasificación de verbos según diversos Autores",
+            embeds: [
+                { label: "Taxonomía de Bloom", src: "https://drive.google.com/file/d/1FG7juxSu-O2j4qX9x3jq3Worx_r_1CT3/preview", driveLink: "https://drive.google.com/file/d/1FG7juxSu-O2j4qX9x3jq3Worx_r_1CT3/view?usp=sharing" },
+                { label: "Taxonomía de Anderson", src: "https://drive.google.com/file/d/1HJ7KVvvUWJCa1gFJn-v_R_D3GzdXxYtO/preview", driveLink: "https://drive.google.com/file/d/1HJ7KVvvUWJCa1gFJn-v_R_D3GzdXxYtO/view?usp=sharing" },
+                { label: "Taxonomía de Marzano", src: "https://drive.google.com/file/d/1BKzxoMnGXOqM4AxIFDYEcVJ19wGROaZw/preview", driveLink: "https://drive.google.com/file/d/1BKzxoMnGXOqM4AxIFDYEcVJ19wGROaZw/view?usp=sharing" },
+                { label: "Taxonomía Socioformativa", src: "https://drive.google.com/file/d/1kgxwJpt7GJkPvpIbI6JgKAeDg1RJ6wQL/preview", driveLink: "https://drive.google.com/file/d/1kgxwJpt7GJkPvpIbI6JgKAeDg1RJ6wQL/view?usp=sharing" }
             ]
         },
         {
             id: "individual",
             icon: "fas fa-user-graduate",
             title: "Trabajos Individuales",
-            description: "Tareas invidviduales de investigacion o consulta.",
+            description: "Tareas individuales de investigación o consulta.",
             embeds: [
-                { label: "CEISH-Comité de Ética en Investigación en Seres Humanos",
-                 src: "https://drive.google.com/file/d/1u4ay9b_6-I-363NPop7PikpnGmNgoo3f/preview",
-                 driveLink: "https://drive.google.com/file/d/1u4ay9b_6-I-363NPop7PikpnGmNgoo3f/view?usp=sharing" },
-                { label: "Tecnología Biométrica en la Evaluación Académica",
-                 src:"https://drive.google.com/file/d/1Ur4oz_1kUFcBZ9iGniv1Do-HWqbWDxb0/preview",
-                 drivelink:"https://drive.google.com/file/d/1Ur4oz_1kUFcBZ9iGniv1Do-HWqbWDxb0/preview"
-                }
+                { label: "CEISH-Comité de Ética en Investigación en Seres Humanos", src: "https://drive.google.com/file/d/1u4ay9b_6-I-363NPop7PikpnGmNgoo3f/preview", driveLink: "https://drive.google.com/file/d/1u4ay9b_6-I-363NPop7PikpnGmNgoo3f/view?usp=sharing" },
+                { label: "ENSAYO/Tecnología Biométrica en la Evaluación Académica", src: "https://drive.google.com/file/d/1Ur4oz_1kUFcBZ9iGniv1Do-HWqbWDxb0/preview", driveLink: "https://drive.google.com/file/d/1Ur4oz_1kUFcBZ9iGniv1Do-HWqbWDxb0/view?usp=sharing" },
+                { label: "GLOSARIO", src: "https://docs.google.com/document/d/e/2PACX-1vTju667wpaVgViarKXvnqRlWJNyhLhBN3dSu8EzJQUwcrSkn9JVSxsyLzyXli2kCg/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vTju667wpaVgViarKXvnqRlWJNyhLhBN3dSu8EzJQUwcrSkn9JVSxsyLzyXli2kCg/pub?embedded=true" },
+                { label: "Flujograma", src: "https://www.canva.com/design/DAHIF-syk4s/xkhzTBJ2M40ACGsOVnsK0g/view?embed", driveLink: "https://www.canva.com/design/DAHIF-syk4s/xkhzTBJ2M40ACGsOVnsK0g/view" },
+                { label: "Mapa Mental", src: "https://drive.google.com/file/d/15sBv-1TcvA2m80MQgTuPpcFxTpsMjGkO/preview", driveLink: "https://drive.google.com/file/d/15sBv-1TcvA2m80MQgTuPpcFxTpsMjGkO/preview?usp=sharing" }
             ]
         },
         {
             id: "grupal",
             icon: "fas fa-hands-helping",
             title: "Trabajos Grupales",
-            description: "Todo trabajo que sea grupal los encuentras aquí.",
+            description: "Trabajos grupales de tres personas",
             embeds: [
-                { label: "Comming soon...", src: "", driveLink: "" },
-                { label: "Árbol de Problemas",
-                 src: "https://www.canva.com/design/DAGqzXtCbgU/Lj5MtbTxfHX4iXgKsY28wA/view",
-                 driveLink: "https://www.canva.com/design/DAGqzXtCbgU/Lj5MtbTxfHX4iXgKsY28wA/view" 
-                }
+                { label: "Coming soon...", src: "", driveLink: "" }
+            ]
+        },
+        {
+            id: "proyecto",
+            icon: "fas fa-lightbulb",
+            title: "Proyecto de investigación",
+            description: "Avances del proyecto final de Investigación",
+            embeds: [
+                { label: "Guía de Presentacion de Perfil", src: "https://docs.google.com/document/d/e/2PACX-1vSEga28IsDD-ZqKQuzEYEW_6w81iT7GeOTeo1mhgBHEEi1XlRsToqQdQIxJ9QRJLg/pub?embedded=true", driveLink: "https://docs.google.com/document/d/e/2PACX-1vSEga28IsDD-ZqKQuzEYEW_6w81iT7GeOTeo1mhgBHEEi1XlRsToqQdQIxJ9QRJLg/pub?embedded=true" },
             ]
         }
     ];
 
-    // =====================================================
     let activeId = sections[0].id;
 
+    // ==================== NAVEGACIÓN ====================
     function renderNav() {
         const nav = document.getElementById('navMenu');
-        nav.innerHTML = sections.map(sec => `
-            <li class="nav-item">
-                <button class="nav-link ${sec.id === activeId ? 'active' : ''}" onclick="navigate('${sec.id}')">
-                    <i class="${sec.id === activeId ? 'fas fa-folder-open' : 'fas fa-folder'}"></i>
-                    <span>${sec.title}</span>
-                </button>
-            </li>`).join('');
+        
+        nav.innerHTML = sections.map(sec => {
+            const isActive = sec.id === activeId;
+            
+            let iconClass = sec.icon || 'fas fa-folder';
+            
+            // Efecto de carpeta para secciones que no tienen icono propio
+            if (!sec.icon) {
+                iconClass = isActive ? 'fas fa-folder-open' : 'fas fa-folder';
+            }
+
+            return `
+                <li class="nav-item">
+                    <button class="nav-link ${isActive ? 'active' : ''}" onclick="navigate('${sec.id}')">
+                        <i class="${iconClass}"></i>
+                        <span>${sec.title}</span>
+                    </button>
+                </li>`;
+        }).join('');
     }
 
+    // ==================== CONTENIDO PRINCIPAL ====================
     function renderMain() {
         const sec = sections.find(s => s.id === activeId);
         const card = document.getElementById('sectionCard');
@@ -432,7 +435,7 @@
                         <small>${s.embeds.length} archivo(s)</small>
                     </div>`).join('')}
             </div>`;
-        } else if (sec.embeds.length === 0) {
+        } else if (sec.embeds.length === 0 || (sec.embeds.length === 1 && sec.embeds[0].label === "aaaa")) {
             body = `<div class="empty-message"><i class="fas fa-folder-open"></i> Carpeta vacía.</div>`;
         } else {
             body = sec.embeds.map(em => `
@@ -442,14 +445,13 @@
                         <strong>${em.label}</strong>
                         ${em.driveLink ? `<a href="${em.driveLink}" target="_blank"><i class="fas fa-external-link-alt"></i> Abrir en Drive</a>` : ''}
                     </div>
-                    ${em.src
-                        ? `<iframe class="embed-frame" src="${em.src}" allowfullscreen></iframe>`
-                        : `<div class="embed-placeholder">
-                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                <span class="sr-only">Loading...</span>
-                                <p>Esperando archivos...</p>
-                                <code> "https://drive.google.com/..."</code>
-                           </div>`
+                    ${em.src ? 
+                        `<iframe class="embed-frame" src="${em.src}" allowfullscreen></iframe>` : 
+                        `<div class="embed-placeholder">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: #94a3b8; margin-bottom: 12px;"></i>
+                            <p>Esperando archivos...</p>
+                            <small style="color: #cbd5e1; margin-top: 8px;">Estamos trabajando en ello</small>
+                        </div>`
                     }
                 </div>`).join('');
         }
@@ -469,6 +471,7 @@
         renderMain();
     }
 
+    // Inicializar
     renderNav();
     renderMain();
 </script>
